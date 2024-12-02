@@ -47,15 +47,15 @@ public class ParcoDivertimenti {
 
 		// Dati attrazioni
 
-		// Aggiungere giorni di apertura
+		//giorni di apertura
 		String venerdì = "venerdì";
 		String sabato = "sabato";
 		String domenica = "domenica";
+		int giorno=0;
 
 		// GIOSTRA 1
 		String attrazione1 = "Tazze Rotanti";
 		int biglietto1 = 5;
-		int postiDisponibili1 = 12;
 		int giriMax1 = 8;
 		int costoOp1 = 2;
 		int b1 = 0;
@@ -63,15 +63,12 @@ public class ParcoDivertimenti {
 		// GIOSTRA 2
 		String attrazione2 = "Torre Magica";
 		int biglietto2 = 10;
-		int postiDisponibili2 = 8;
-		int giriMax2 = 10;
 		int costoOp2 = 3;
 		int b2 = 0;
 
 		// GIOSTRA 3
 		String attrazione3 = "Bruco Mela";
 		int biglietto3 = 2;
-		int postiDisponibili3 = 20;
 		int giriMax3 = 6;
 		int costoOp3 = 5;
 		int b3 = 0;
@@ -84,28 +81,37 @@ public class ParcoDivertimenti {
 		int attesaAtt1 = 0;
 		int attesaAtt2 = 0;
 		int attesaAtt3 = 0;
-		int soddisfattiTot=1;
+		int soddisfattiTot=0;
 		boolean vSoddisfatto=false;
-		//double statSoddisfatti = ((double) soddisfattiTot / numeroVisitatori) * 100;
-		
+			
 		
 
 		Scanner scanner = new Scanner(System.in);
 
-		String giorni[] = { "venerdì", "sabato", "domenica" };
 
-		int sceltaGiornoRandom = ((int) (Math.random()) * giorni.length); // scelta random per verificare se il parco è
+		int sceltaGiornoRandom = (int) Math.random() * 5 + 1; // scelta random per verificare se il parco è
 																			// aperto
+		if (sceltaGiornoRandom==1) {
 		System.out.println(
-				"Benvenuti al parco divertimenti. Oggi è " + giorni[sceltaGiornoRandom] + " il parco è aperto.");
+				"Benvenuti al parco divertimenti. Oggi è " + venerdì + " e il parco è aperto.");
+		} else if (sceltaGiornoRandom==2) {
+			System.out.println(
+					"Benvenuti al parco divertimenti. Oggi è " + sabato + " e il parco è aperto.");
+		} else if (sceltaGiornoRandom==3) {
+			System.out.println(
+					"Benvenuti al parco divertimenti. Oggi è " + domenica + " e il parco è aperto.");
+		} else {System.out.println(
+				"Oggi il parco non è aperto.");
+				System.exit(0);
+		}
 
-		for (numeroVisitatori = 1; numeroVisitatori <= 10; numeroVisitatori++) {
+		for (numeroVisitatori = 0; numeroVisitatori < 10; numeroVisitatori++) {
 
-			System.out.println("Entra il visitatore n. " + (numeroVisitatori));
+			System.out.println("Entra il visitatore n. " + (numeroVisitatori+1));
 			double budget = Math.random() * 4 + 2; // viene assegnato randomicamente il budget
 			System.out.println("Il budget del visitatore è di: " + (int) budget + " euro.");
 
-			double attmax = Math.random() * 6 + 2; // viene assegnato randomicamente il budget
+			double attmax = Math.random() * 3 + 2; // viene assegnato randomicamente l'attesa massima del visitatore
 			System.out.println("Il visitatore è disposto ad aspettare in fila al massimo " + (int) attmax + " minuti.");
 
 			double fila1 = Math.random() * 9 + 1; // viene assegnato randomicamente la fila
@@ -115,8 +121,8 @@ public class ParcoDivertimenti {
 			System.out.println();
 			if (vSoddisfatto==true) {
 				soddisfattiTot+=1;
-				System.out.println(soddisfattiTot);
 			}
+			
 			do {
 
 				if (attmax < fila1 && attmax < fila2 && attmax < fila3) {
@@ -245,23 +251,14 @@ public class ParcoDivertimenti {
 			}
 			System.out.println("Il tempo medio di attesa per " + attrazione1 + " è: " + (attesaAtt1 / (b1 + tentativi1))
 					+ " minuti.");
-			// System.out.println((int) attesaAtt1);
-			// System.out.println("biglietti venduti: " + b1);
 			System.out.println("Il tempo medio di attesa per " + attrazione2 + " è: " + (attesaAtt2 / (b2 + tentativi2))
 					+ " minuti.");
 			System.out.println("Il tempo medio di attesa per " + attrazione3 + " è: " + (attesaAtt3 / (b3 + tentativi3))
 					+ " minuti.");
 			
-			double statSoddisfatti=(soddisfattiTot / numeroVisitatori) * 100;
-			System.out.println(statSoddisfatti);
+			double statSoddisfatti= (double)soddisfattiTot / (double) numeroVisitatori *100;
 			System.out.println("I visitatori sono soddisfatti per il " +((int)statSoddisfatti) + "%");
-			System.out.println("Numero di soddisfatti: " + soddisfattiTot);
-			System.out.println("Numero di visitatori: " + numeroVisitatori);
-					//+ (((b1 + b2 + b3) - (tentativi1 + tentativi2 + tentativi3) / numeroVisitatori)) + "%"); // scopri
-																												// come
-																												// fare
-																												// una
-																												// percentuale
+			
 
 		} else
 			System.out.println("Arrivederci!");
