@@ -37,7 +37,7 @@ public class ParcoDivertimenti {
 		int tentativi1 = 0;
 		int tentativi2 = 0;
 		int tentativi3 = 0;
-		int numeroVisitatori = 10;
+		int numeroVisitatori = 100;
 		int attesaAtt1 = 0;
 		int attesaAtt2 = 0;
 		int attesaAtt3 = 0;
@@ -64,25 +64,24 @@ public class ParcoDivertimenti {
 				System.exit(0);
 		}
 
-		for (numeroVisitatori = 0; numeroVisitatori < 10; numeroVisitatori++) {
+		for (numeroVisitatori = 0; numeroVisitatori < 100; numeroVisitatori++) {
 
 			System.out.println("Entra il visitatore n. " + (numeroVisitatori+1));
-			double budget = Math.random() * 4 + 2; 		// viene assegnato randomicamente il budget
+			double budget = Math.random() * 8 + 1; 		// viene assegnato randomicamente il budget
 			System.out.println("Il budget del visitatore è di: " + (int) budget + " euro.");
 
-			double attmax = Math.random() * 3 + 2; 		// viene assegnato randomicamente l'attesa massima del visitatore
+			double attmax = Math.random() * 8 + 1; 		// viene assegnato randomicamente l'attesa massima del visitatore
 			System.out.println("Il visitatore è disposto ad aspettare in fila al massimo " + (int) attmax + " minuti.");
 
-			double fila1 = Math.random() * 9 + 1; 		// viene assegnato randomicamente la fila
-			double fila2 = Math.random() * 5 + 1;
+			double fila1 = Math.random() * 12 + 3; 		// viene assegnato randomicamente la fila
+			double fila2 = Math.random() * 3 + 2;
 			double fila3 = Math.random() * 1 + 1;
 
 			System.out.println();
 			
 			//verifica per i visitatori soddisfatti. Se diventa vero 1 volta nel ciclo aggiunge 1 al numero totale
-			if (vSoddisfatto==true) {
-				soddisfattiTot+=1;
-			}
+			vSoddisfatto=false;		//per ogni visitatore imposta la soddisfazione su falso finchè non avviene la condizione che lo modifica
+			
 			
 			do {
 
@@ -189,8 +188,10 @@ public class ParcoDivertimenti {
 									// riparte da capo
 				} 
 
-			} while (budget >= biglietto1 && budget >= biglietto2 && budget >= biglietto3);
-
+			} while (budget >= biglietto1 || budget >= biglietto2 || budget >= biglietto3);
+			if (vSoddisfatto) {						//imposta +1 ai soddisfatti totali solo a fine ciclo
+		        soddisfattiTot++;
+		}
 		}
 		
 		System.out.println("Visualizzare statistiche (1) o uscire(2)?");			
